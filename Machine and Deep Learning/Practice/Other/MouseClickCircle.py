@@ -5,7 +5,7 @@ def drawCircle(event, x, y, flags, params):
     if(event == cv2.EVENT_LBUTTONDBLCLK):
         cv2.circle(img, (x,y), 20, (255,0,0), 2)
         
-img = np.zeros((500,500,3))
+img = np.zeros((500,500,3), np.uint8)
 # img[:] = [255, 255, 255]
 
 cv2.namedWindow("image")
