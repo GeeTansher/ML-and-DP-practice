@@ -50,8 +50,8 @@ while(True):
     
     mask = cv2.inRange(hsv, lowerHSV, upperHSV)
     mask = cv2.medianBlur(mask, 3)
-    mask_inv = 255-mask
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    mask_inv = 255-mask
     
     b = frame[:,:,0]
     g = frame[:,:,1]
