@@ -2,6 +2,7 @@
     "cSpell.words": [
         "CLAHE",
         "imread",
-        "imshow"
+        "imshow",
+        "Trackbar"
     ]
 }
