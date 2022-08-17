@@ -51,6 +51,7 @@ while(True):
     mask = cv2.inRange(hsv, lowerHSV, upperHSV)
     mask = cv2.medianBlur(mask, 3)
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
     mask_inv = 255-mask
     
     b = frame[:,:,0]
@@ -72,7 +73,7 @@ while(True):
     fullFrame = cv2.bitwise_or(backFrame, blanketFrame)
     
     cv2.imshow("Final",fullFrame)
-    cv2.imshow("mask",mask)
+    # cv2.imshow("mask",mask)
     
     if(cv2.waitKey(3)==27):
         break
