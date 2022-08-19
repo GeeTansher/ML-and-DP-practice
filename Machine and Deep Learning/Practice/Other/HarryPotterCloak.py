@@ -24,13 +24,20 @@ cv2.createTrackbar("Lower Hue", "Color Detector", 129, 180, setValue)
 cv2.createTrackbar("Lower Saturation", "Color Detector", 50, 255, setValue)
 cv2.createTrackbar("Lower Value", "Color Detector", 70, 255, setValue)
 
-
-while(True):
-    cv2.waitKey(1000)
-    ret, init_frame = cap.read()
-    if ret:
-        break
+init_frame = None
+def takeInitFrame():
+    global init_frame
+    while(True):
+        cv2.waitKey(1000)
+        ret, init_frame = cap.read()
+        if ret:
+            break
     
+
+takeInitFrame()
+# init_frame = cv2.imread("D:/ML-and-DP-practice/Machine and Deep Learning/Practice/images/flower.jpg")
+# init_frame = cv2.resize(init_frame,(640,480))
+# print(init_frame.shape)
 
 while(True):
     ret, frame = cap.read()
@@ -78,7 +85,7 @@ while(True):
     if(cv2.waitKey(3)==27):
         break
     elif(cv2.waitKey(3)==ord('n')):
-        _,init_frame = cap.read()
+        takeInitFrame()
     
 cap.release()
 cv2.destroyAllWindows()
