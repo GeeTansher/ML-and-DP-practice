@@ -1,6 +1,6 @@
 import cv2
 
-cap = cv2.VideoCapture('./Other/VideoReverseProgram/Video.mp4')
+cap = cv2.VideoCapture('D:\ML-and-DP-practice\Machine and Deep Learning\Practice\VideoReverseProgram\Video.mp4')
 
 forec = cv2.VideoWriter_fourcc(*'MJPG')
 
@@ -11,7 +11,7 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 print("Height - {} \nWidth - {} \nFPS - {}".format(h,w,fps))
 lastFrame = cap.get(cv2.CAP_PROP_FRAME_COUNT)
 
-out = cv2.VideoWriter('./Other/VideoReverseProgram/Reverse.avi',forec,fps,(int(w) , int(h)))
+out = cv2.VideoWriter('D:\ML-and-DP-practice\Machine and Deep Learning\Practice\VideoReverseProgram\Reverse.avi',forec,fps,(int(w) , int(h)))
 
 lastFrame = lastFrame-1
 
