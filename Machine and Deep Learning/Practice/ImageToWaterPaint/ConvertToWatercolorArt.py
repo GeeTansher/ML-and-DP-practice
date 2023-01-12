@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Read image
-img = cv2.imread(r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\ImageToWaterPaint\flower.jpg')
+img = cv2.imread(r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\ImageToWaterPaint\scene.jpgq')
 
 # Resize image
 img_resize = cv2.resize(img,None,fx=1,fy=1)
