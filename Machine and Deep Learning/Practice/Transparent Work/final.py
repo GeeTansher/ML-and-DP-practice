@@ -18,7 +18,6 @@ import cv2
 from PIL import Image, ImageFont, ImageDraw
 
 
-
 # Building layout
 class CamApp(App):
 
@@ -26,20 +25,21 @@ class CamApp(App):
         # Main layout components
         imgLabel = Label(text="Enter Image location:")
         self.imgLocName = TextInput(text="")
-        
+
         _1stLabel = Label(text="Enter 1st text:")
-        self._1stText = TextInput(text="Palri, Uttar Pradesh, India", multiline=False)
-        
+        self._1stText = TextInput(
+            text="Palri, Uttar Pradesh, India", multiline=False)
+
         _2ndLabel = Label(text="Enter 2nd text:")
         self._2ndText = TextInput(text='''9G5M+53W, Shamli Rd, Palri, Uttar Pradesh
 251318, India
 Lat 29.358261°
 Long 77.532764°
 30/10/22 03:05 PM GMT+05:30''', multiline=True)
-        
+
         self.button = Button(
             text="Generate Image", on_press=self.doEverything, size_hint=(1, .1))
-        
+
         self.label = Label(text="", size_hint=(1, .1))
 
         # Grid layout
@@ -58,37 +58,36 @@ Long 77.532764°
         gridLayout.add_widget(_2ndLabel)
         gridLayout.add_widget(self._2ndText)
 
-
-        self.width=596
-        self.height=842
+        self.width = 596
+        self.height = 842
 
         return self.layout
-    
-    def putimg(self,image_new, path, w, h, x, y):
+
+    def putimg(self, image_new, path, w, h, x, y):
         img3 = cv2.imread(path)
-        img3 = cv2.resize(img3, (w,h), interpolation = cv2.INTER_CUBIC)
+        img3 = cv2.resize(img3, (w, h), interpolation=cv2.INTER_CUBIC)
         Img = Image.fromarray(img3)
         img = Image.fromarray(image_new)
-        img.paste(Img, (x,y))
+        img.paste(Img, (x, y))
         return np.array(img)
-    
-    def puttext(self,img, x, y, word, font, size, w=0):
-        image = Image.fromarray(img)
-        draw = ImageDraw.Draw(image)  
 
-        # use a truetype font  
-        font = ImageFont.truetype(font, size)  
-        draw.text((x,y), word, font=font, stroke_fill='white', stroke_width=w)
+    def puttext(self, img, x, y, word, font, size, w=0):
+        image = Image.fromarray(img)
+        draw = ImageDraw.Draw(image)
+
+        # use a truetype font
+        font = ImageFont.truetype(font, size)
+        draw.text((x, y), word, font=font, stroke_fill='white', stroke_width=w)
         return np.array(image)
-    
-    
-    def doEverything(self,im):
+
+    def doEverything(self, im):
         if self.imgLocName.text == "":
             self.label.text = 'Please fill Img Loc Block...'
-        else:   
+        else:
             # print("hello",text1)
             image = cv2.imread(self.imgLocName.text)
-            image = cv2.resize(image,(self.width,self.height), interpolation = cv2.INTER_CUBIC)
+            image = cv2.resize(image, (self.width, self.height),
+                               interpolation=cv2.INTER_CUBIC)
             overlay = image.copy()
 
             # Rectangle parameters
@@ -98,32 +97,31 @@ Long 77.532764°
             cv2.rectangle(overlay, (x, y), (x+w, y+h), (0, 0, 0), -1)
             cv2.rectangle(overlay, (x1, y1), (x1+w1, y1+h1), (0, 0, 0), -1)
 
-            overlay = self.puttext(overlay,505,679,"GPS Map Camera","arial.ttf", 9)
-            overlay = self.puttext(overlay,170,692,self._1stText.text,"SegUIVar.ttf", 22, 1)
-            overlay = self.puttext(overlay,170,725,self._2ndText.text,"SegUIVar.ttf", 15)
+            overlay = self.puttext(
+                overlay, 505, 679, "GPS Map Camera", "arial.ttf", 9)
+            overlay = self.puttext(
+                overlay, 170, 692, self._1stText.text, "SegUIVar.ttf", 22, 1)
+            overlay = self.puttext(
+                overlay, 170, 725, self._2ndText.text, "SegUIVar.ttf", 15)
 
-
-            alpha = 0.7 # Transparency factor.
+            alpha = 0.7  # Transparency factor.
 
             # Following line overlays transparent rectangle
             # over the image
             image_new = cv2.addWeighted(overlay, alpha, image, 1 - alpha, 0)
             image_new = self.putimg(image_new, 'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\small gps.jpg',
-                                10, 10, 492, 679)
+                                    10, 10, 492, 679)
             image_new = self.putimg(image_new, r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\big map.png',
-                                141, 141, 10, 693)
+                                    141, 141, 10, 693)
 
-            cv2.imwrite(r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\hi.png', image_new)
+            cv2.imwrite(
+                r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\Generated.png', image_new)
             self.label.text = 'Success'
-
-
-
-
 
 
 if __name__ == '__main__':
     text = 'Palri, Uttar Pradesh, India'
-    text1 ='''9G5M+53W, Shamli Rd, Palri, Uttar Pradesh
+    text1 = '''9G5M+53W, Shamli Rd, Palri, Uttar Pradesh
 251318, India
 Lat 29.358261°
 Long 77.532764°
