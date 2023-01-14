@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 from PIL import Image, ImageFont, ImageDraw
+import argparse
 
 def puttext(img, x, y, word, font, size, w=0):
     image = Image.fromarray(img)
@@ -20,23 +21,35 @@ def putimg(image_new, path, w, h, x, y):
     img.paste(Img, (x,y))
     return np.array(img)
 
- 
-image = cv2.imread(r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\images\scene2.webp')
+
+parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument("-f", "--file", type=argparse.FileType("r"), required=True)
+parser.add_argument("-t")
+parser.add_argument("-y")
+args = parser.parse_args()
+
+
+# image = cv2.imread(r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\images\scene2.webp')
+image = cv2.imread(args.file.name)
 
  
 width=596
 height=842
 image = cv2.resize(image,(width,height), interpolation = cv2.INTER_CUBIC)
 
- 
-text = 'Palri, Uttar Pradesh, India'
-text1 ='''9G5M+53W, Shamli Rd, Palri, Uttar Pradesh
-251318, India
-Lat 29.358261°
-Long 77.532764°
-30/10/22 03:05 PM GMT+05:30'''
+if(args.t != None):
+    text = args.t
+else:
+    text = 'Palri, Uttar Pradesh, India'
 
+if(args.y != None):
+    text1 = args.y
+else:
+    text1 ='''9G5M+53W, Shamli Rd, Palri, Uttar Pradesh\\n251318, India\\nLat 29.358261°\\nLong 77.532764°\\n30/10/22 03:05 PM GMT+05:30'''
 
+# print(text1)
+t = text1.split("\\n")
+print(t)
 
 overlay = image.copy()
 
