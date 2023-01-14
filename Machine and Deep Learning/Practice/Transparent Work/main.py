@@ -24,9 +24,9 @@ def putimg(image_new, path, w, h, x, y):
 
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
-parser.add_argument("-f", "--file", type=argparse.FileType("r"), required=True)
-parser.add_argument("-t")
-parser.add_argument("-y")
+parser.add_argument("-f", "--file", type=argparse.FileType("r"), required=True, help='Enter image path')
+parser.add_argument("-t", type=str, help='Enter 1st Location if not Palri')
+parser.add_argument("-y", type=str, help='Enter 2nd Location Text if not related to Palri')
 args = parser.parse_args()
 
 
