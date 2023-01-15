@@ -41,7 +41,6 @@ for n in path:
         ResultPath = ResultPath+n
     else:
         ResultPath = ResultPath+n+'\\'
-        
 
 
 if (args.t != None):
@@ -61,14 +60,16 @@ if (args.y != None):
 else:
     text1 = '''9G5M+53W, Shamli Rd, Palri, Uttar Pradesh
 251318, India
-Lat 29.358261°
-Long 77.532764°
+Lat 29.358261
+Long 77.532764
 30/10/22 03:05 PM GMT+05:30'''
 
+
 if(image.shape[0] >= image.shape[1]):
-    width = 556 # 596
-    height = 930  # 842
+    width = 556
+    height = 930
     image = cv2.resize(image, (width, height), interpolation=cv2.INTER_CUBIC)
+
     overlay = image.copy()
 
     # Rectangle parameters
@@ -78,9 +79,9 @@ if(image.shape[0] >= image.shape[1]):
     cv2.rectangle(overlay, (x, y), (x+w, y+h), (0, 0, 0), -1)
     cv2.rectangle(overlay, (x1, y1), (x1+w1, y1+h1), (0, 0, 0), -1)
 
-    overlay = puttext(overlay, 465, 766, "GPS Map Camera", "arial.ttf", 9)
-    overlay = puttext(overlay, 170, 780, text, "SegUIVar.ttf", 22, 1)
-    overlay = puttext(overlay, 170, 813, text1, "SegUIVar.ttf", 15)
+    overlay = puttext(overlay, 465, 767, "GPS Map Camera", "arial.ttf", 9)
+    overlay = puttext(overlay, 170, 780, text, "segoeui.ttf", 22, 1)
+    overlay = puttext(overlay, 170, 813, text1, "segoeui.ttf", 15)
 
 
     alpha = 0.7  # Transparency factor.
@@ -88,11 +89,10 @@ if(image.shape[0] >= image.shape[1]):
     # Following line overlays transparent rectangle
     # over the image
     image_new = cv2.addWeighted(overlay, alpha, image, 1 - alpha, 0)
-    image_new = putimg(image_new, 'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\small gps.jpg',
+    image_new = putimg(image_new, 'D:\working data\SOFTWARE1\geetansh map software\Transparent Work\small gps.jpg',
                     10, 10, 452, 767)
-    image_new = putimg(image_new, r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\big map.png',
+    image_new = putimg(image_new, r'D:\working data\SOFTWARE1\geetansh map software\Transparent Work\big map.png',
                     141, 141, 10, 781)
-    
 else:
     width = 1100
     height = 556
@@ -117,11 +117,10 @@ else:
     # Following line overlays transparent rectangle
     # over the image
     image_new = cv2.addWeighted(overlay, alpha, image, 1 - alpha, 0)
-    image_new = putimg(image_new, 'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\small gps.jpg',
+    image_new = putimg(image_new, 'D:\working data\SOFTWARE1\geetansh map software\Transparent Work\small gps.jpg',
                     13, 13, 970, 390)
-    image_new = putimg(image_new, r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\big map.png',
+    image_new = putimg(image_new, r'D:\working data\SOFTWARE1\geetansh map software\Transparent Work\big map.png',
                     141, 141, 10, 404)
-
-
+    
 cv2.imwrite(ResultPath, image_new)
 print("Success")

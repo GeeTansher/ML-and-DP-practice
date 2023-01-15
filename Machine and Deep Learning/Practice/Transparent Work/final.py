@@ -58,8 +58,8 @@ Long 77.532764°
         gridLayout.add_widget(_2ndLabel)
         gridLayout.add_widget(self._2ndText)
 
-        self.width = 596
-        self.height = 842
+        self.width = 556
+        self.height = 930
 
         return self.layout
 
@@ -91,14 +91,14 @@ Long 77.532764°
             overlay = image.copy()
 
             # Rectangle parameters
-            x, y, w, h = 160, self.height-150, 425, 140
-            x1, y1, w1, h1 = 490, self.height-164, 95, 13
+            x, y, w, h = 160, self.height-150, 385, 140
+            x1, y1, w1, h1 = 450, self.height-164, 95, 13
             # A filled rectangle
             cv2.rectangle(overlay, (x, y), (x+w, y+h), (0, 0, 0), -1)
             cv2.rectangle(overlay, (x1, y1), (x1+w1, y1+h1), (0, 0, 0), -1)
 
             overlay = self.puttext(
-                overlay, 505, 679, "GPS Map Camera", "arial.ttf", 9)
+                overlay, 465, 679, "GPS Map Camera", "arial.ttf", 9)
             overlay = self.puttext(
                 overlay, 170, 692, self._1stText.text, "SegUIVar.ttf", 22, 1)
             overlay = self.puttext(
@@ -110,7 +110,7 @@ Long 77.532764°
             # over the image
             image_new = cv2.addWeighted(overlay, alpha, image, 1 - alpha, 0)
             image_new = self.putimg(image_new, 'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\small gps.jpg',
-                                    10, 10, 492, 679)
+                                    10, 10, 452, 679)
             image_new = self.putimg(image_new, r'D:\ML-and-DP-practice\Machine and Deep Learning\Practice\Transparent Work\big map.png',
                                     141, 141, 10, 693)
 
